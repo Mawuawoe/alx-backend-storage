@@ -1,0 +1,8 @@
+-- sql script to create a users table
+-- create a table
+CREATE TABLE IF NOT EXISTS users (
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+email VARCHAR(255) NOT NULL UNIQUE,
+name VARCHAR(255),
+country ENUM('US', 'CO', 'TN') DEFAULT 'US'
+);
