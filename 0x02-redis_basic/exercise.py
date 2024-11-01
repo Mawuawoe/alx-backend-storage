@@ -116,4 +116,3 @@ def replay(method: Callable):
         print("{}(*{}) -> {}".format(method_name,
                                      input_data.decode("utf-8"),
                                      output_data.decode("utf-8")))
-
