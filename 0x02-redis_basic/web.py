@@ -7,7 +7,6 @@ import redis
 from typing import Callable
 from functools import wraps
 
-
 # Initialize Redis client
 r = redis.Redis()
 
@@ -28,13 +27,16 @@ def cache_result(timeout: int = 10) -> Callable:
         @wraps(method)
         def wrapper(url: str) -> str:
             # Check if the content is already cached
-            cached_content = r.get(f"cached:{url}")
+            cache_key = f"cached:{url}"
+            cached_content = r.get(cache_key)
             if cached_content:
+                print("Cache hit")  # Debug statement
                 return cached_content.decode("utf-8")
 
             # Otherwise, fetch the content and cache it
             content = method(url)
-            r.setex(f"cached:{url}", timeout, content)
+            r.setex(cache_key, timeout, content)
+            print("Cache miss - fetched from source")  # Debug statement
             return content
         return wrapper
     return decorator
