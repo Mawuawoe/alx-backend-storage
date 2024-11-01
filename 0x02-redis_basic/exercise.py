@@ -113,5 +113,7 @@ def replay(method: Callable):
     # Display each call's inputs and outputs
     for i, (input_data,
             output_data) in enumerate(zip(inputs, outputs), start=1):
-        print(f"{method_name}(*{input_data.decode('utf-8')}) ->
-              {output_data.decode('utf-8')}")
+        print("{}(*{}) -> {}".format(method_name,
+                                     input_data.decode("utf-8"),
+                                     output_data.decode("utf-8")))
+
